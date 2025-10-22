@@ -1,0 +1,23 @@
+    name: Manual Trigger Workflow
+    on:
+      workflow_dispatch:
+        inputs:
+          logLevel:
+            description: 'Log level'
+            required: true
+            default: 'info'
+          tags:
+            description: 'Tags to run'
+            required: false
+            type: choice
+            options:
+            - 'staging'
+            - 'production'
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Print inputs
+            run: |
+              echo "Log Level: ${{ github.event.inputs.logLevel }}"
+              echo "Tags: ${{ github.event.inputs.tags }}"
